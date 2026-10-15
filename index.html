@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#11141d">
+    <title>Himig Halo — Hear your own kind of glow</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --night: #090c1b;
+            --ink: #11152b;
+            --cream: #f8f4ec;
+            --muted: #b4b7d0;
+            --lilac: #c7a9ff;
+            --mint: #9be9f0;
+            --orange: #ffd08a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 34px 18px;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(ellipse at 50% 45%, #222348 0, #11152a 42%, #070914 82%);
+            color: var(--cream);
+            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .flyer {
+            position: relative;
+            isolation: isolate;
+            width: min(100%, 900px);
+            min-height: 1180px;
+            overflow: hidden;
+            padding: 46px 58px 32px;
+            background:
+                radial-gradient(1.5px 1.5px at 8% 17%, rgba(255,255,255,.9), transparent 70%),
+                radial-gradient(1px 1px at 20% 41%, rgba(178,208,255,.8), transparent 70%),
+                radial-gradient(1.5px 1.5px at 31% 9%, rgba(255,255,255,.78), transparent 70%),
+                radial-gradient(1px 1px at 46% 28%, rgba(207,190,255,.88), transparent 70%),
+                radial-gradient(1px 1px at 61% 13%, rgba(255,255,255,.8), transparent 70%),
+                radial-gradient(1.5px 1.5px at 79% 20%, rgba(163,226,255,.8), transparent 70%),
+                radial-gradient(1px 1px at 92% 37%, rgba(255,255,255,.75), transparent 70%),
+                radial-gradient(1px 1px at 14% 62%, rgba(255,255,255,.7), transparent 70%),
+                radial-gradient(1.5px 1.5px at 86% 73%, rgba(195,177,255,.75), transparent 70%),
+                radial-gradient(1px 1px at 42% 84%, rgba(255,255,255,.72), transparent 70%),
+                radial-gradient(ellipse at 77% 38%, rgba(117, 99, 206, .25), transparent 34%),
+                radial-gradient(ellipse at 19% 75%, rgba(77, 190, 211, .12), transparent 30%),
+                linear-gradient(145deg, #171a35 0%, #0d1124 48%, #14152d 100%);
+            border: 1px solid rgba(255,255,255,.14);
+            box-shadow: 0 36px 100px rgba(0,0,0,.48);
+        }
+
+        .flyer::before,
+        .flyer::after {
+            position: absolute;
+            z-index: -1;
+            content: "";
+            pointer-events: none;
+        }
+
+        .flyer::before {
+            inset: 16px;
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .flyer::after {
+            width: 440px;
+            height: 440px;
+            top: 265px;
+            right: 28px;
+            border: 1px solid rgba(155,187,255,.17);
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 38px rgba(201,168,255,.035),
+                0 0 0 77px rgba(201,168,255,.025),
+                inset 0 0 60px rgba(113,119,255,.05);
+            transform: rotate(-24deg) scaleX(1.28);
+        }
+
+        .topbar,
+        .brand,
+        .brand-mark,
+        .edition,
+        .details,
+        .detail,
+        .footer,
+        .partners,
+        .partner {
+            display: flex;
+            align-items: center;
+        }
+
+        .topbar {
+            justify-content: space-between;
+            gap: 20px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255,255,255,.16);
+        }
+
+        .brand { gap: 12px; }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            justify-content: center;
+            border: 1px solid rgba(201,168,255,.8);
+            border-radius: 50%;
+            color: var(--lilac);
+            font-size: 19px;
+        }
+
+        .brand-name {
+            font-size: 15px;
+            font-weight: 750;
+            letter-spacing: .22em;
+        }
+
+        .brand-type {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 8px;
+            letter-spacing: .23em;
+        }
+
+        .edition {
+            gap: 9px;
+            color: #d9d4e5;
+            font-size: 9px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .edition::before {
+            width: 6px;
+            height: 6px;
+            content: "";
+            border-radius: 50%;
+            background: var(--mint);
+            box-shadow: 0 0 12px var(--mint);
+        }
+
+        .intro {
+            position: relative;
+            z-index: 2;
+            padding-top: 36px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            margin: 0 0 14px;
+            color: var(--mint);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 680px;
+            margin: 0 auto;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(44px, 7vw, 74px);
+            font-weight: 400;
+            letter-spacing: -.045em;
+            line-height: .98;
+        }
+
+        h1 em {
+            color: var(--lilac);
+            font-weight: 400;
+        }
+
+        .subhead {
+            margin: 15px 0 0;
+            color: #cfced8;
+            font-size: 14px;
+            letter-spacing: .035em;
+        }
+
+        .stage {
+            position: relative;
+            height: 432px;
+            margin: 7px auto 0;
+            perspective: 1000px;
+        }
+
+        .stage-label {
+            position: absolute;
+            z-index: 1;
+            top: 47%;
+            left: 2px;
+            color: rgba(248,244,236,.52);
+            font-size: 8px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        .product-art {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: min(100%, 560px);
+            height: 100%;
+            margin: 0 auto;
+            overflow: visible;
+        }
+
+        .product-assembly {
+            transform-box: fill-box;
+            transform-origin: 50% 50%;
+        }
+
+        .earbud-control {
+            cursor: pointer;
+            touch-action: manipulation;
+            transform-box: fill-box;
+            transform-origin: 50% 90%;
+            transition: transform .55s cubic-bezier(.2, .8, .2, 1), filter .3s ease;
+        }
+
+        .earbud-control:hover,
+        .earbud-control:focus-visible {
+            filter: drop-shadow(0 0 9px rgba(169,244,219,.76));
+            outline: none;
+        }
+
+        .earbud-control.is-playing {
+            filter: drop-shadow(0 0 12px rgba(169,244,219,.8));
+            transform: translateY(-68px) scale(1.045);
+            animation: earbud-bob 2.8s ease-in-out .55s infinite;
+        }
+
+        @keyframes earbud-bob {
+            0%, 100% { translate: 0 0; }
+            50% { translate: 0 -9px; }
+        }
+
+        .interaction-hint {
+            position: absolute;
+            z-index: 2;
+            top: 12px;
+            left: 50%;
+            width: min(90%, 360px);
+            color: #c8c5d7;
+            font-size: 9px;
+            letter-spacing: .08em;
+            line-height: 1.5;
+            text-align: center;
+            transform: translateX(-50%);
+        }
+
+        .interaction-hint::before {
+            margin-right: 7px;
+            color: var(--mint);
+            content: "◉";
+        }
+
+        .meteor {
+            position: absolute;
+            z-index: 2;
+            top: 12%;
+            left: 4%;
+            width: 132px;
+            height: 4px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, transparent, rgba(155,233,240,.7) 48%, #fff 100%);
+            box-shadow: 0 0 12px rgba(155,233,240,1), 0 0 28px rgba(199,169,255,.8);
+            opacity: 0;
+            pointer-events: none;
+            transform: rotate(24deg);
+            transform-origin: right center;
+            will-change: transform, opacity;
+            animation: meteor-flight 24s linear var(--meteor-delay, -1.2s) infinite;
+        }
+
+        .meteor-2 {
+            --meteor-delay: -6s;
+            --meteor-x: clamp(90px, 18vw, 200px);
+            --meteor-y: clamp(36px, 9vh, 76px);
+            --meteor-angle: 20deg;
+            top: 25%;
+            left: 24%;
+            width: 105px;
+        }
+
+        .meteor-3 {
+            --meteor-delay: -10.8s;
+            --meteor-x: clamp(90px, 18vw, 200px);
+            --meteor-y: clamp(36px, 9vh, 76px);
+            --meteor-angle: 27deg;
+            top: 7%;
+            left: 53%;
+            width: 118px;
+        }
+
+        .meteor-4 {
+            --meteor-delay: -15.6s;
+            --meteor-x: clamp(90px, 18vw, 200px);
+            --meteor-y: clamp(36px, 9vh, 76px);
+            --meteor-angle: 22deg;
+            top: 54%;
+            left: 9%;
+            width: 94px;
+        }
+
+        .meteor-5 {
+            --meteor-delay: -20.4s;
+            --meteor-x: clamp(90px, 18vw, 200px);
+            --meteor-y: clamp(36px, 9vh, 76px);
+            --meteor-angle: 25deg;
+            top: 43%;
+            left: 48%;
+            width: 112px;
+        }
+
+        .meteor::after {
+            position: absolute;
+            top: 50%;
+            right: -3px;
+            width: 9px;
+            height: 9px;
+            content: "";
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 10px 3px var(--mint), 0 0 20px 6px rgba(199,169,255,.85);
+            transform: translateY(-50%);
+        }
+
+        @keyframes meteor-flight {
+            0%, 3% { opacity: 0; transform: translate3d(-14px, -8px, 0) rotate(var(--meteor-angle, 24deg)); }
+            8% { opacity: .95; }
+            38% { opacity: .9; transform: translate3d(var(--meteor-x, clamp(90px, 18vw, 200px)), var(--meteor-y, clamp(36px, 9vh, 76px)), 0) rotate(var(--meteor-angle, 24deg)); }
+            45%, 100% { opacity: 0; transform: translate3d(calc(var(--meteor-x, clamp(90px, 18vw, 200px)) + 20px), calc(var(--meteor-y, clamp(36px, 9vh, 76px)) + 8px), 0) rotate(var(--meteor-angle, 24deg)); }
+        }
+
+        .product-flight {
+            transform-box: fill-box;
+            transform-origin: 50% 50%;
+            animation: product-float 5s ease-in-out infinite;
+        }
+
+        @keyframes product-float {
+            0%, 100% { transform: translate(0, 5px) scale(1); }
+            50% { transform: translate(0, -11px) scale(1.015); }
+        }
+
+        .star-twinkle {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: twinkle 3.4s ease-in-out infinite;
+        }
+
+        .star-twinkle:nth-of-type(2n) { animation-delay: -1.7s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: .3; transform: scale(.72); }
+            50% { opacity: 1; transform: scale(1.25); }
+        }
+
+        .callout {
+            position: absolute;
+            z-index: 2;
+            color: #e9e5f0;
+            font-size: 9px;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+        }
+
+        .callout span {
+            display: block;
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 8px;
+            letter-spacing: .04em;
+            text-transform: none;
+        }
+
+        .callout::after {
+            position: absolute;
+            top: 6px;
+            width: 49px;
+            height: 1px;
+            content: "";
+            background: linear-gradient(90deg, var(--lilac), transparent);
+        }
+
+        .callout-left { top: 42%; left: 2%; }
+        .callout-left::after { left: calc(100% + 9px); }
+        .callout-right { top: 58%; right: 1%; text-align: right; }
+        .callout-right::after {
+            right: calc(100% + 9px);
+            background: linear-gradient(270deg, var(--mint), transparent);
+        }
+
+        .below-art {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 30px;
+            align-items: center;
+            margin-top: -4px;
+            padding: 23px 0 25px;
+            border-top: 1px solid rgba(255,255,255,.15);
+            border-bottom: 1px solid rgba(255,255,255,.15);
+        }
+
+        .product-copy h2 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 31px;
+            font-weight: 400;
+            letter-spacing: -.025em;
+        }
+
+        .product-copy p {
+            max-width: 385px;
+            margin: 8px 0 0;
+            color: #c2c0cc;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .price-box {
+            padding-left: 26px;
+            border-left: 1px solid rgba(255,255,255,.2);
+            text-align: right;
+        }
+
+        .price-caption {
+            color: var(--mint);
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .price {
+            margin-top: 4px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 38px;
+            line-height: 1;
+        }
+
+        .old-price {
+            margin-top: 5px;
+            color: #a5a3af;
+            font-size: 10px;
+        }
+
+        .old-price s { color: #898692; }
+        .old-price strong { margin-left: 7px; color: var(--orange); }
+
+        .details {
+            justify-content: space-between;
+            gap: 15px;
+            padding: 19px 0 20px;
+        }
+
+        .detail {
+            gap: 9px;
+            color: #e6e2ec;
+            font-size: 9px;
+            letter-spacing: .04em;
+        }
+
+        .detail-icon {
+            display: grid;
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+            place-items: center;
+            border: 1px solid rgba(201,168,255,.36);
+            border-radius: 50%;
+            color: var(--lilac);
+            font-size: 10px;
+        }
+
+        .action-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 1px 0 22px;
+        }
+
+        .offer-note {
+            margin: 0;
+            color: #bdbac7;
+            font-size: 9px;
+            line-height: 1.6;
+        }
+
+        .offer-note strong { color: var(--cream); }
+
+        .cta {
+            display: inline-flex;
+            min-height: 43px;
+            align-items: center;
+            justify-content: center;
+            gap: 17px;
+            padding: 0 20px;
+            border: 0;
+            border-radius: 999px;
+            background: linear-gradient(100deg, #d6bbff, #a9f4db);
+            color: #171924;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(169,244,219,.22);
+        }
+
+        .cta span { font-size: 16px; }
+
+        .footer {
+            min-height: 53px;
+            justify-content: space-between;
+            gap: 20px;
+            padding-top: 13px;
+            border-top: 1px solid rgba(255,255,255,.16);
+        }
+
+        .footer-brand {
+            color: #d3cfdb;
+            font-size: 8px;
+            letter-spacing: .15em;
+        }
+
+        .footer-brand strong {
+            color: var(--cream);
+            font-size: 10px;
+            letter-spacing: .21em;
+        }
+
+        .partners { gap: 19px; }
+        .partner { gap: 6px; color: #a9a6b3; font-size: 8px; letter-spacing: .1em; }
+        .partner-mark { color: var(--lilac); font-size: 13px; }
+
+        .fine-print {
+            color: #777783;
+            font-size: 7px;
+            letter-spacing: .05em;
+            text-align: center;
+        }
+
+        @media (max-width: 650px) {
+            body { padding: 0; }
+            .flyer {
+                min-height: 100vh;
+                padding: 28px 25px 23px;
+                border: 0;
+            }
+            .flyer::before { inset: 9px; }
+            .flyer::after { top: 285px; right: -180px; }
+            .topbar { padding-bottom: 18px; }
+            .edition { font-size: 7px; letter-spacing: .12em; }
+            .intro { padding-top: 30px; }
+            h1 { font-size: clamp(43px, 11vw, 64px); }
+            .subhead { font-size: 12px; }
+            .stage { height: min(105vw, 390px); margin-top: 5px; }
+            .stage-label { left: -12px; }
+            .callout-left { left: 0; }
+            .callout-right { right: 0; }
+            .callout::after { width: 27px; }
+            .below-art { grid-template-columns: 1fr auto; gap: 13px; padding: 19px 0; }
+            .product-copy h2 { font-size: 25px; }
+            .product-copy p { font-size: 10px; }
+            .price-box { padding-left: 14px; }
+            .price { font-size: 30px; }
+            .details { display: grid; grid-template-columns: 1fr 1fr; row-gap: 13px; padding: 16px 0; }
+            .detail { font-size: 8px; }
+            .action-row { align-items: flex-start; }
+            .offer-note { max-width: 150px; }
+            .cta { gap: 9px; padding: 0 14px; font-size: 8px; }
+            .footer { align-items: flex-start; }
+            .partners { flex-wrap: wrap; justify-content: flex-end; gap: 8px 13px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .meteor, .product-flight, .star-twinkle, .earbud-control.is-playing { animation: none; }
+            .earbud-control { transition-duration: .01ms; }
+        }
+
+        @media (max-width: 380px) {
+            .flyer { padding-right: 19px; padding-left: 19px; }
+            .brand-name { font-size: 13px; }
+            .edition { font-size: 6px; }
+            .below-art { grid-template-columns: 1fr; }
+            .price-box { padding: 12px 0 0; border-top: 1px solid rgba(255,255,255,.15); border-left: 0; text-align: left; }
+            .price { display: inline-block; margin-right: 9px; }
+            .old-price { display: inline-block; }
+            .action-row { align-items: center; }
+        }
+
+        @media print {
+            @page { size: A4 portrait; margin: 0; }
+            body { min-height: auto; padding: 0; background: var(--night); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .flyer { width: 210mm; min-height: 297mm; padding: 11mm 14mm 8mm; border: 0; box-shadow: none; }
+            .stage { height: 105mm; }
+            .cta { color: #171924; }
+        }
+    </style>
+</head>
+<body>
+    <main class="flyer" aria-label="Himig Halo wireless earbuds promotional flyer">
+        <header class="topbar">
+            <div class="brand" aria-label="Himig Audio">
+                <div class="brand-mark" aria-hidden="true">♫</div>
+                <div>
+                    <div class="brand-name">HIMIG</div>
+                    <div class="brand-type">AUDIO, IN YOUR ELEMENT</div>
+                </div>
+            </div>
+            <div class="edition">The Halo Collection · 2026</div>
+        </header>
+
+        <section class="intro">
+            <p class="eyebrow">Your sound. Your own orbit.</p>
+            <h1>Tune into<br><em>another world.</em></h1>
+            <p class="subhead">A little more wonder in every “play.” Sarili mong universe, kahit saan.</p>
+        </section>
+
+        <section class="stage" aria-label="The open Himig Halo earbuds case and both earbuds float together in space">
+            <div class="stage-label">Designed to move with you</div>
+            <div class="interaction-hint" id="audio-status" aria-live="polite">Tap a bud to lift it &amp; play · tap again to stop</div>
+            <div class="meteor" aria-hidden="true"></div>
+            <div class="meteor meteor-2" aria-hidden="true"></div>
+            <div class="meteor meteor-3" aria-hidden="true"></div>
+            <div class="meteor meteor-4" aria-hidden="true"></div>
+            <div class="meteor meteor-5" aria-hidden="true"></div>
+            <div class="callout callout-left">Zero-gravity fit<span>Comfort na parang walang suot</span></div>
+            <div class="callout callout-right">Cosmic aura glow<span>Your little galaxy, on the go</span></div>
+            <svg class="product-art" viewBox="0 0 560 430" role="img" aria-labelledby="art-title art-desc">
+                <title id="art-title">Himig Halo earbuds orbiting in a cosmic product display</title>
+                <desc id="art-desc">A glossy, sculpted pair of pearl-lilac stem earbuds sit angled outward in the open charging case, with their stems upright in the charging wells, gently drifting together in a weightless starfield.</desc>
+                <defs>
+                    <linearGradient id="case" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0" stop-color="#f1e9ff"/>
+                        <stop offset=".38" stop-color="#c9b8df"/>
+                        <stop offset=".72" stop-color="#8c7ca8"/>
+                        <stop offset="1" stop-color="#e4d9f3"/>
+                    </linearGradient>
+                    <linearGradient id="caseSide" x1="0" x2=".9" y1="0" y2="1">
+                        <stop offset="0" stop-color="#eadfff"/>
+                        <stop offset=".45" stop-color="#b9a8d0"/>
+                        <stop offset="1" stop-color="#716884"/>
+                    </linearGradient>
+                    <linearGradient id="earbud" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0" stop-color="#fffaff"/>
+                        <stop offset=".18" stop-color="#fff" stop-opacity=".96"/>
+                        <stop offset=".44" stop-color="#e4d7f8"/>
+                        <stop offset=".78" stop-color="#b7a4d1"/>
+                        <stop offset="1" stop-color="#766584"/>
+                    </linearGradient>
+                    <linearGradient id="stem" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0" stop-color="#635875"/>
+                        <stop offset=".18" stop-color="#fffaff"/>
+                        <stop offset=".32" stop-color="#bca9d7"/>
+                        <stop offset=".48" stop-color="#f6edff"/>
+                        <stop offset=".68" stop-color="#8b7a9f"/>
+                        <stop offset=".82" stop-color="#ede1ff"/>
+                        <stop offset="1" stop-color="#756589"/>
+                    </linearGradient>
+                    <linearGradient id="caseBevel" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0" stop-color="#fff" stop-opacity=".86"/>
+                        <stop offset=".2" stop-color="#eee5ff" stop-opacity=".44"/>
+                        <stop offset=".7" stop-color="#8b789f" stop-opacity=".35"/>
+                        <stop offset="1" stop-color="#fff" stop-opacity=".12"/>
+                    </linearGradient>
+                    <radialGradient id="budGloss" cx=".28" cy=".18" r=".83">
+                        <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+                        <stop offset=".18" stop-color="#fff" stop-opacity=".35"/>
+                        <stop offset=".62" stop-color="#fff" stop-opacity=".04"/>
+                        <stop offset="1" stop-color="#3a2e50" stop-opacity=".34"/>
+                    </radialGradient>
+                    <linearGradient id="well" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0" stop-color="#43394f"/>
+                        <stop offset=".55" stop-color="#211d2b"/>
+                        <stop offset="1" stop-color="#766786"/>
+                    </linearGradient>
+                    <linearGradient id="glow" x1="0" x2="1">
+                        <stop offset="0" stop-color="#a9f4db" stop-opacity=".05"/>
+                        <stop offset=".5" stop-color="#b9ffe9" stop-opacity=".95"/>
+                        <stop offset="1" stop-color="#c9a8ff" stop-opacity=".1"/>
+                    </linearGradient>
+                    <radialGradient id="aura">
+                        <stop offset="0" stop-color="#a9f4db" stop-opacity=".34"/>
+                        <stop offset=".48" stop-color="#c9a8ff" stop-opacity=".16"/>
+                        <stop offset="1" stop-color="#c9a8ff" stop-opacity="0"/>
+                    </radialGradient>
+                    <filter id="blur" x="-60%" y="-60%" width="220%" height="220%">
+                        <feGaussianBlur stdDeviation="13"/>
+                    </filter>
+                    <filter id="shadow" x="-40%" y="-40%" width="180%" height="200%">
+                        <feMorphology in="SourceAlpha" operator="dilate" radius="2.2" result="thickness"/>
+                        <feFlood flood-color="#51445f" result="depth-color"/>
+                        <feComposite in="depth-color" in2="thickness" operator="in" result="depth"/>
+                        <feOffset in="depth" dx="5" dy="7" result="depth-offset"/>
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="shadow-blur"/>
+                        <feOffset in="shadow-blur" dy="13" result="shadow-offset"/>
+                        <feComponentTransfer in="shadow-offset" result="shadow">
+                            <feFuncA type="linear" slope=".34"/>
+                        </feComponentTransfer>
+                        <feMerge>
+                            <feMergeNode in="shadow"/>
+                            <feMergeNode in="depth-offset"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <ellipse cx="282" cy="276" rx="220" ry="140" fill="url(#aura)"/>
+                <ellipse cx="282" cy="245" rx="216" ry="70" fill="none" stroke="#a9b5ff" stroke-opacity=".12" stroke-width="1" transform="rotate(-12 282 245)"/>
+                <ellipse cx="282" cy="245" rx="182" ry="55" fill="none" stroke="#9be9f0" stroke-opacity=".09" stroke-width="1" transform="rotate(16 282 245)"/>
+                <ellipse cx="280" cy="368" rx="170" ry="18" fill="#b1f6e2" opacity=".22" filter="url(#blur)"/>
+                <ellipse cx="280" cy="375" rx="147" ry="7" fill="url(#glow)" opacity=".92"/>
+                <ellipse cx="280" cy="380" rx="99" ry="3" fill="#f0fff9" opacity=".9" filter="url(#blur)"/>
+
+                <g opacity=".62" fill="none" stroke="#d8c5ff">
+                    <path d="M89 252c-22-32-17-69 8-91" stroke-width="1"/>
+                    <path d="M468 185c19 23 23 49 14 76" stroke-width="1"/>
+                    <circle class="star-twinkle" cx="111" cy="154" r="2" fill="#9be9f0" stroke="none"/>
+                    <circle class="star-twinkle" cx="445" cy="133" r="2.5" fill="#c9a8ff" stroke="none"/>
+                    <circle class="star-twinkle" cx="409" cy="294" r="1.6" fill="#9be9f0" stroke="none"/>
+                    <circle class="star-twinkle" cx="141" cy="291" r="1.4" fill="#fff" stroke="none"/>
+                    <circle class="star-twinkle" cx="389" cy="184" r="1.2" fill="#fff" stroke="none"/>
+                    <path d="M154 116v15m-7.5-7.5h15M430 236v12m-6-6h12" stroke-width="1.1"/>
+                </g>
+
+                <g class="product-flight">
+                    <g class="product-assembly">
+                        <g transform="translate(169 168)" filter="url(#shadow)">
+                            <path d="M20 94Q11 40 53 17 117-16 184 17q44 22 36 77l-14 14Q118 76 34 109Z" fill="url(#caseSide)" stroke="#fff" stroke-opacity=".74" stroke-width="1.5"/>
+                            <path d="M34 91Q27 48 62 30q55-27 112 0 35 18 29 61l-17 15Q118 74 46 106Z" fill="#292434" stroke="#f7edff" stroke-opacity=".74" stroke-width="2"/>
+                            <path d="M43 82Q40 53 68 39q50-23 99 0 27 14 23 43l-15 12q-57-23-116 0Z" fill="url(#well)" stroke="#d9c9ed" stroke-opacity=".58"/>
+                            <path d="M53 75Q55 51 77 43q40-17 81 0 21 9 20 32" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="2"/>
+                            <path d="M35 92Q118 62 204 93" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="2"/>
+                            <path d="M44 101Q118 77 195 101" fill="none" stroke="#564a67" stroke-opacity=".82" stroke-width="3"/>
+                        </g>
+
+                        <g transform="translate(156 220)">
+                            <path d="M17 73Q124 27 231 73Q124 116 17 73Z" fill="url(#well)" stroke="#f7edff" stroke-opacity=".8" stroke-width="2"/>
+                            <path d="M26 73Q124 38 222 73" fill="none" stroke="#fff" stroke-opacity=".68" stroke-width="2"/>
+                            <ellipse cx="69" cy="72" rx="22" ry="9" fill="#1e1a27" stroke="#c9b8df" stroke-opacity=".6"/>
+                            <ellipse cx="69" cy="70" rx="12" ry="4" fill="#746584" opacity=".8"/>
+                            <ellipse cx="179" cy="72" rx="22" ry="9" fill="#1e1a27" stroke="#c9b8df" stroke-opacity=".6"/>
+                            <ellipse cx="179" cy="70" rx="12" ry="4" fill="#746584" opacity=".8"/>
+                        </g>
+
+                        <g id="bud-left" class="earbud-control" role="button" tabindex="0" aria-label="Play left earbud audio" aria-pressed="false">
+                          <title>Left earbud: click to play its audio, click again to stop.</title>
+                          <g transform="translate(190 174) rotate(-8 38 78)" filter="url(#shadow)">
+                            <g transform="rotate(-26 34 67)">
+                                <path d="M12 41Q-3 37-7 29q-3-7 4-11l10-5q9-12 26-10 25 2 30 27 5 25-15 38-16 11-35 1Q1 61 0 52Z" fill="url(#silicone)" stroke="#fff" stroke-opacity=".56"/>
+                                <ellipse cx="2" cy="32" rx="8" ry="11" fill="#675b78" stroke="#efe6fb" stroke-opacity=".55"/>
+                                <ellipse cx="1" cy="32" rx="4.8" ry="7.2" fill="#241f30"/>
+                                <path d="M33 5C15 5 2 18 2 36q0 20 20 29l12 4 12-5Q63 55 63 36 63 7 33 5Z" fill="url(#earbud)" stroke="#fff" stroke-opacity=".9"/>
+                                <path d="M33 5C15 5 2 18 2 36q0 20 20 29l12 4 12-5Q63 55 63 36 63 7 33 5Z" fill="url(#budGloss)"/>
+                                <path d="M12 21q7-12 21-11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".92"/>
+                                <ellipse cx="10" cy="39" rx="4.2" ry="8" fill="#30283b" stroke="#fff" stroke-opacity=".62" stroke-width=".9"/>
+                                <path d="M8 34v10m2-11v12m2-11v11m2-10v9" stroke="#ddd2eb" stroke-opacity=".76" stroke-width=".7"/>
+                            </g>
+                            <path d="M28 63q8 4 16 0l1 73q0 9-8 10-8-1-8-10Z" fill="url(#stem)" stroke="#fff" stroke-opacity=".75"/>
+                            <path d="M31 70l1 61" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".78"/>
+                            <path d="M43 72l1 57" fill="none" stroke="#70617f" stroke-width="1.4" stroke-linecap="round" opacity=".62"/>
+                            <circle cx="39" cy="122" r="2" fill="#effffb"/>
+                          </g>
+                        </g>
+
+                        <g id="bud-right" class="earbud-control" role="button" tabindex="0" aria-label="Play right earbud audio" aria-pressed="false">
+                          <title>Right earbud: click to play its audio, click again to stop.</title>
+                          <g transform="translate(296 174) scale(-1 1) translate(-63 0) rotate(-8 38 78)" filter="url(#shadow)">
+                            <g transform="rotate(-26 34 67)">
+                                <path d="M12 41Q-3 37-7 29q-3-7 4-11l10-5q9-12 26-10 25 2 30 27 5 25-15 38-16 11-35 1Q1 61 0 52Z" fill="url(#silicone)" stroke="#fff" stroke-opacity=".56"/>
+                                <ellipse cx="2" cy="32" rx="8" ry="11" fill="#675b78" stroke="#efe6fb" stroke-opacity=".55"/>
+                                <ellipse cx="1" cy="32" rx="4.8" ry="7.2" fill="#241f30"/>
+                                <path d="M33 5C15 5 2 18 2 36q0 20 20 29l12 4 12-5Q63 55 63 36 63 7 33 5Z" fill="url(#earbud)" stroke="#fff" stroke-opacity=".9"/>
+                                <path d="M33 5C15 5 2 18 2 36q0 20 20 29l12 4 12-5Q63 55 63 36 63 7 33 5Z" fill="url(#budGloss)"/>
+                                <path d="M12 21q7-12 21-11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".92"/>
+                                <ellipse cx="10" cy="39" rx="4.2" ry="8" fill="#30283b" stroke="#fff" stroke-opacity=".62" stroke-width=".9"/>
+                                <path d="M8 34v10m2-11v12m2-11v11m2-10v9" stroke="#ddd2eb" stroke-opacity=".76" stroke-width=".7"/>
+                            </g>
+                            <path d="M28 63q8 4 16 0l1 73q0 9-8 10-8-1-8-10Z" fill="url(#stem)" stroke="#fff" stroke-opacity=".75"/>
+                            <path d="M31 70l1 61" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity=".78"/>
+                            <path d="M43 72l1 57" fill="none" stroke="#70617f" stroke-width="1.4" stroke-linecap="round" opacity=".62"/>
+                            <circle cx="39" cy="122" r="2" fill="#effffb"/>
+                          </g>
+                        </g>
+
+                        <g transform="translate(156 220)" filter="url(#shadow)">
+                            <path d="M15 78Q124 38 233 78l-8 68q-2 17-22 24-79 29-158 0-20-7-22-24Z" fill="url(#case)" stroke="#fff" stroke-opacity=".82" stroke-width="1.6"/>
+                            <path d="M15 78Q124 38 233 78l-8 68q-2 17-22 24-79 29-158 0-20-7-22-24Z" fill="url(#caseBevel)" opacity=".48"/>
+                            <path d="M16 79Q124 42 232 79" fill="none" stroke="#fff" stroke-opacity=".94" stroke-width="2.4"/>
+                            <path d="M23 87Q124 55 225 87" fill="none" stroke="#88769e" stroke-opacity=".86" stroke-width="2"/>
+                            <path d="M25 140q99 38 198 0" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="1.3"/>
+                            <path d="M36 155q88 30 176 0" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="1"/>
+                            <circle cx="124" cy="124" r="3.5" fill="#eafff8"/>
+                            <circle cx="124" cy="124" r="10" fill="#a9f4db" opacity=".5" filter="url(#blur)"/>
+                            <circle cx="220" cy="111" r="4.5" fill="#9180a4" stroke="#fff" stroke-opacity=".5"/>
+                            <circle cx="220" cy="111" r="2" fill="#30293a"/>
+                            <path d="M61 173q63 17 126 0" fill="none" stroke="#a9f4db" stroke-opacity=".52"/>
+                        </g>
+                    </g>
+                </g>
+
+                <g fill="none" stroke="#a9f4db" opacity=".55">
+                    <path d="M213 365c19 8 42 12 67 12s48-4 67-12" stroke-width="1"/>
+                    <path d="M226 374c14 5 33 8 54 8s40-3 54-8" stroke-width=".7"/>
+                </g>
+            </svg>
+        </section>
+
+        <section class="below-art" aria-label="Product description and launch price">
+            <div class="product-copy">
+                <h2>Meet Halo Buds.</h2>
+                <p>Crystal-clear sound, wrapped in a cloud-soft fit. Open the case, feel the glow, and let the outside world fade. <em>Made for your every day.</em></p>
+            </div>
+            <div class="price-box">
+                <div class="price-caption">Launch offer · limited time</div>
+                <div class="price">₱1,999</div>
+                <div class="old-price"><s>₱2,799</s><strong>Save ₱800</strong></div>
+            </div>
+        </section>
+
+        <section class="details" aria-label="Product features">
+            <div class="detail"><span class="detail-icon" aria-hidden="true">♫</span>Rich, balanced audio</div>
+            <div class="detail"><span class="detail-icon" aria-hidden="true">◉</span>Noise cancellation</div>
+            <div class="detail"><span class="detail-icon" aria-hidden="true">↗</span>Up to 30-hour playtime</div>
+            <div class="detail"><span class="detail-icon" aria-hidden="true">⌁</span>Splash-resistant · IPX4</div>
+        </section>
+
+        <section class="action-row" aria-label="Order information">
+            <p class="offer-note"><strong>Hear the difference.</strong><br>Free delivery + 1-year warranty.<br>Available in Moonmilk &amp; Sage Glow.</p>
+            <a class="cta" href="mailto:hello@himigaudio.example?subject=Himig%20Halo%20Buds%20order">Get yours today <span aria-hidden="true">→</span></a>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-brand"><strong>HIMIG</strong><br>LOCAL SOUND, MADE FOR YOU</div>
+            <div class="fine-print">Follow the feeling · @himigaudio · himigaudio.example</div>
+            <div class="partners" aria-label="Brand partners">
+                <div class="partner"><span class="partner-mark" aria-hidden="true">✳</span>GLOW LAB</div>
+                <div class="partner"><span class="partner-mark" aria-hidden="true">◒</span>TINIG STUDIO</div>
+            </div>
+        </footer>
+    </main>
+    <audio id="audio-left" src="halo-left.mp3" preload="none"></audio>
+    <audio id="audio-right" src="halo-right.mp3" preload="none"></audio>
+    <script>
+        const audioStatus = document.getElementById("audio-status");
+        const earbuds = {
+            left: {
+                audio: document.getElementById("audio-left"),
+                control: document.getElementById("bud-left"),
+                label: "Left"
+            },
+            right: {
+                audio: document.getElementById("audio-right"),
+                control: document.getElementById ("bud-right"),
+                label: "Right"
+            }
+        };
+
+        function stopEarbud(earbud) {
+            earbud.audio.pause();
+            earbud.audio.currentTime = 0;
+            earbud.control.classList.remove("is-playing");
+            earbud.control.setAttribute("aria-pressed", "false");
+            earbud.control.setAttribute("aria-label", `Play ${earbud.label.toLowerCase()} earbud audio`);
+        }
+
+        async function toggleEarbud(side) {
+            const selected = earbuds[side];
+
+            if (!selected.audio.paused) {
+                stopEarbud(selected);
+                audioStatus.textContent = `${selected.label} bud stopped. Tap either bud to listen.`;
+                return;
+            }
+
+            Object.entries(earbuds).forEach(([otherSide, earbud]) => {
+                if (otherSide !== side) stopEarbud(earbud);
+            });
+
+            selected.control.classList.add("is-playing");
+            selected.control.setAttribute("aria-pressed", "true");
+            selected.control.setAttribute("aria-label", `Stop ${selected.label.toLowerCase()} earbud audio`);
+            audioStatus.textContent = `Playing the ${selected.label.toLowerCase()} bud track…`;
+
+            try {
+                await selected.audio.play();
+            } catch (error) {
+                stopEarbud(selected);
+                audioStatus.textContent = `Couldn't play the ${selected.label.toLowerCase()} bud track. Check that its audio file is available.`;
+                console.error(`Unable to play the ${selected.label.toLowerCase()} earbud audio.`, error);
+            }
+        }
+
+        Object.entries(earbuds).forEach(([side, earbud]) => {
+            earbud.control.addEventListener("click", () => toggleEarbud(side));
+            earbud.control.addEventListener("keydown", event => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    toggleEarbud(side);
+                }
+            });
+            earbud.audio.addEventListener("ended", () => {
+                earbud.control.classList.remove("is-playing");
+                earbud.control.setAttribute("aria-pressed", "false");
+                earbud.control.setAttribute("aria-label", `Play ${earbud.label.toLowerCase()} earbud audio`);
+                audioStatus.textContent = `${earbud.label} bud track finished. Tap either bud to listen again.`;
+            });
+            earbud.audio.addEventListener("error", () => {
+                stopEarbud(earbud);
+                audioStatus.textContent = `Couldn't load the ${earbud.label.toLowerCase()} bud track. Check that its audio file is available.`;
+            });
+        });
+    </script>
+</body>
+</html>
